@@ -1,0 +1,18 @@
+
+<div class='head'>
+<h1>Minu kirjed <%= link_to 'Lisa uus', new_instance_path, class: 'btn btn-lg btn-outline-success' %></h1>
+<p>Ligi pääsevad kasutajad "admin" ja/või "student" grupis. Näha ainult kasutaja poolt loodud kirjed.</p>
+</div>
+<div class='container'>
+<% @instances.each do |instance| %>
+<div class="card">
+  <div class="card-block">
+    <h4 class="card-title"><%= instance.title %></h4>
+    <p class="card-text"><%= instance.text %></p>
+    <%= link_to 'Kustuta', instance_path(instance),
+              method: :delete,
+              data: { confirm: 'Are you sure?' }, class: 'card-link' %>
+  </div>
+</div>
+<% end %>
+</div>

@@ -1,0 +1,18 @@
+
+<h1>Minu laborid</h1>
+<p>Ligi pääsevad kasutajad "staff" grupis. Näha kõik loodud laborid.</p>
+<div class='container'>
+  <% @labs.each do |lab| %>
+
+<div class="card">
+  <div class="card-header">
+    <%= lab.title %>
+  </div>
+  <div class="card-block">
+    <h4 class="card-title"><%= lab.title %></h4>
+    <p class="card-text"><%= lab.text %></p>
+    <%= link_to 'Show', lab_path(lab), class: 'btn btn-primary' %>
+  </div>
+</div>
+  <% end %>
+</div>

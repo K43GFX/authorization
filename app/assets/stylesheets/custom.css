@@ -1,0 +1,9 @@
+.alert-notice {
+  @extend .alert-success;
+}
+.navbar {
+        margin-bottom: 15px;
+}
+.card {
+	margin-bottom: 25px;
+}

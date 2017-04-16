@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Auth</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <%= link_to "Auth", root_path, class: "navbar-brand" %>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <%= link_to 'Pealeht', root_path, class: 'nav-link' %>
+      </li>
+      <% if user_signed_in? %>
+      <% if current_user.has_role? :student %>
+      <li class="nav-item">
+      <%= link_to 'Minu kirjed', instances_path, class: 'nav-link' %>
+      </li>
+        <% end %>
+      <% if current_user.has_role? :admin %>
+      <li class="nav-item">
+      <%= link_to 'Minu kirjed', { controller: 'instances', action: 'index' },class: 'nav-link' %>
+      </li>
+      <li class="nav-item">
+      <%= link_to 'Kõik kirjed', { controller: 'instances', action: 'all' },class: 'nav-link' %>
+      </li>
+        <% end %>
+        <% end %> 
+              </ul>
+              <ul class='nav navbar-nav'>
+
+              <% if user_signed_in? %>
+
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= current_user.email %></a>
+            <ul class="dropdown-menu-right dropdown-menu" aria-labelledby="dropdown01">
+            <% if current_user.has_role? :student %>
+                  <%= link_to 'Minu kirjed', instances_path, class: 'dropdown-item' %>
+                <% end %>
+            <% if current_user.has_role? :admin %>
+                  <%= link_to 'Minu kirjed', instances_path, class: 'dropdown-item' %>
+                  <%= link_to 'Kõik kirjed', { controller: 'instances', action: 'all' }, class: 'dropdown-item' %>
+                <% end %>
+              <%= link_to 'Profiil', edit_user_registration_path, class: 'dropdown-item' %>
+              <%= link_to 'Logi välja', destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
+            </ul>
+          </li>
+          <% else %>
+          <ul>
+            <%= link_to 'Logi sisse', new_user_session_path, class: 'btn btn-outline-warning my-2 my-sm-0' %>
+            <%= link_to 'Registreeru', new_user_registration_path, class: 'btn btn-outline-success my-2 my-sm-0' %>
+            <ul>
+          <% end %>
+          </ul>
+  </div>
+</nav>
+  <div class="container">
+    <% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>">
+      <%= value %>
+      
+    </div>
+  <% end %>
+  </div>
+
+  <%= yield :top_content %>
+
+  <div class="container">
+    <h1><%= yield :header %></h1>
+  <%= yield %>
+  </div>
+  </body>
+</html>
