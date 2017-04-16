@@ -1,5 +1,6 @@
 class User
   include Mongoid::Document
+  after_create :default_role
   rolify
   has_many :instances
   has_many :labs
@@ -35,7 +36,7 @@ class User
   # field :failed_attempts, type: Integer, default: 0 # Only if lock strategy is :failed_attempts
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
   # field :locked_at,       type: Time
-  def assign_default_role
+  def default_role
     self.add_role(:student) if self.roles.blank?
   end
 end
