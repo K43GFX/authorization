@@ -1,2 +1,10 @@
 <h1>Welcome#index</h1>
 <p>Siia saavad kõik ligi. Mingit autoriseerimist ega autentimist ei toimu.</p>
+<br>
+<p>/ - placeholder. Ligi pääsevad kõik</p>
+<p>/instances - näitab kasutaja poolt lisatud kirjeid (ligi pääseb roll admin/student)</p>
+<p>/instances/new - uue kirje lisamine (ligi pääseb roll admin/student)</p>
+<p>/instances/all - kõikide kirjadega manipuleerimine (ligi pääseb roll admin)</p>
+<br>
+<p>Admini rolli lisamine käib läbi konsooli. Nt User.first.add_role :admin</p>
+<p>Terve rollide haldus käib ability.rb mudelis. Tuleb määrata rollile kõik lubatud tegevused mudeliga.</p>
